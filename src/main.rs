@@ -1,21 +1,25 @@
 mod input_system;
-mod lookup_tables;
+mod macros;
 extern crate libc;
 
 fn test_callback()
 {
-    println!("YEEETTT");
+    println!("Callback 1");
 }
 
 fn test_callback_2()
 {
-    println!("YEEETTT");
+    println!("Callback 2");
 }
 
 fn main() {
     let mut input = input_system::InputSystem::new().unwrap();
-    input.attach_listener(lookup_tables::KEY_Y, &test_callback);
-    input.attach_listener(lookup_tables::KEY_U, &test_callback_2);
+
+    // attaching a fonction to a certain key press
+    input.attach_listener(macros::KEY_Y, &test_callback);
+    input.attach_listener(macros::KEY_U, &test_callback_2);
+
+    /* Example without using the listener feature */
     loop{
         let key = input.read_key();
         let key = match key
@@ -24,12 +28,13 @@ fn main() {
             None => continue,
         };
 
-        if key == lookup_tables::KEY_A
+        /* example of usage*/
+        if key == macros::KEY_A
         {
             println!("A was pressed !");
         }
 
-        if key == lookup_tables::KEY_ESC
+        if key == macros::KEY_ESC
         {
             println!("Escaping !");
             break;
