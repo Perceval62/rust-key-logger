@@ -37,7 +37,7 @@ impl InputSystem<'_>
 
     pub fn new() -> Result<Self, &'static str>
     {
-         root_check();
+        root_check();
         let ret = File::open(DRIVERFILELOCATION);
         let file = match ret {
             Ok(opened_file) => opened_file,
